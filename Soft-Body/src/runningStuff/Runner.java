@@ -23,12 +23,20 @@ public class Runner extends Canvas implements Runnable{
 
 	Thread thread;
 	
+	ObjectHandler handler;
+	
 	boolean running;
+	
+	Scene scene;
+	
+	public static boolean gravity = true;
 	
 	public Runner () {
 		
 		thread = new Thread();
 		running = false;
+		handler = new ObjectHandler();
+		scene = new Scene(handler);
 		
 		new Window(WIDTH, HEIGHT, "Soft Body Sim", this);
 		
@@ -94,7 +102,8 @@ public class Runner extends Canvas implements Runnable{
 	}
 	
 	public void tick() {
-		
+		handler.tick();
+		scene.tick();
 	}
 	
 	public void render() {
@@ -110,6 +119,8 @@ public class Runner extends Canvas implements Runnable{
 		g.setColor(bkg);
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 		
+		handler.render(g);
+		scene.render(g);
 		
 		g.dispose();
 		bs.show();

@@ -23,6 +23,34 @@ public class MassPoint extends Interactable{
 		mass = 5;
 	}
 	
+	public void addForce(Force f) {
+		forces.add(f);
+	}
+	
+	private float netForceX() {
+		float magnitudeX = 0;
+		
+		for (int i = 0; i<forces.size(); i++) {
+			magnitudeX+=forces.get(i).getXComponent();
+		}
+		
+		
+		return magnitudeX;
+		
+	}
+	
+	private float netForceY() {
+		float magnitudeY = 0;
+		
+		for (int i = 0; i<forces.size(); i++) {
+			magnitudeY+=forces.get(i).getYComponent();
+		}
+		
+		
+		return magnitudeY;
+		
+	}
+	
 	@Override
 	public Rectangle getBounds() {
 		
@@ -31,13 +59,22 @@ public class MassPoint extends Interactable{
 
 	@Override
 	public void tick() {
+		float accelerationX = netForceX()/mass;
+		float accelerationY = netForceY()/mass;
+		
+		xVol+=accelerationX;
+		yVol+=accelerationY;
+		
+		x+=xVol;
+		y+=yVol;
+		
 		
 	}
 
 	@Override
 	public void render(Graphics g) {
 		g.setColor(new Color(200, 0, 0));
-		g.fillOval((int)x, (int)y, 10, 10);
+		g.fillOval((int)x, (int)y, 5, 5);
 	}
 
 }

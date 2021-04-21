@@ -4,9 +4,9 @@ public class Force {
 	
 	private float magnitude, angle;
 	
-	public Force(float mag, float deg) {
+	public Force(float mag, float rad) {
 		magnitude = mag;
-		angle = deg;
+		angle = rad;
 	}
 	
 	

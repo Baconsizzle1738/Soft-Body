@@ -13,7 +13,19 @@ public class Scene extends Updateable{
 	}
 	
 	private void setScene() {
-		handler.add(new MassPoint(100, 100));
+		
+//		MassPoint m = new MassPoint(100, 100);
+//		m.addForce(new Force(0.098f, 0f));
+		MassPoint m1 = new MassPoint(100, 101);
+		m1.addForce(new Force(0.098f, (float)Math.PI*0.5f));
+//		MassPoint m2 = new MassPoint(100, 102);
+//		m2.addForce(new Force(0.098f, (float)Math.PI));
+//		MassPoint m3 = new MassPoint(100, 103);
+//		m3.addForce(new Force(0.098f, (float)Math.PI*1.5f));
+//		handler.add(m);
+		handler.add(m1);
+//		handler.add(m2);
+//		handler.add(m3);
 	}
 	
 	@Override

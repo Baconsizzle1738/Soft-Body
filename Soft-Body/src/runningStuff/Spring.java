@@ -10,18 +10,26 @@ public class Spring extends Interactable{
 	
 	private MassPoint p1, p2;
 	
-	public Spring (float rest, float disp, float cons, MassPoint p1, MassPoint p2) {
+	public Spring (float rest, float disp, float Kcons, MassPoint p1, MassPoint p2) {
 		
 		this.rest = rest;
 		length = (float) Math.abs(Math.sqrt(Math.pow((p1.getX()-p2.getX()), 2) + Math.pow((p1.getY()-p2.getY()), 2)));
-		k = cons;
+		k = Kcons;
 		this.p1 = p1;
 		this.p2 = p2;
 		force = (this.rest-length)*k;
 		
 	}
 	
-	
+	private Force VectorizeP1() {
+		//calculate angle relative to p1
+		float x = p2.getX() - p1.getX();
+		float y = p2.getY() - p1.getY();
+		
+		
+		
+		return null;
+	}
 	
 	@Override
 	public Rectangle getBounds() {
@@ -30,6 +38,8 @@ public class Spring extends Interactable{
 
 	@Override
 	public void tick() {
+		force = (length - rest)*k;
+		force -= force*0.01;
 		
 	}
 

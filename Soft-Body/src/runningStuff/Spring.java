@@ -23,8 +23,8 @@ public class Spring extends Interactable{
 	
 	private Force VectorizeP1() {
 		//calculate angle relative to p1
-		float x = p2.getX() - p1.getX();
-		float y = p2.getY() - p1.getY();
+		float xlen = p2.getX() - p1.getX();
+		float ylen = p2.getY() - p1.getY();
 		
 		
 		

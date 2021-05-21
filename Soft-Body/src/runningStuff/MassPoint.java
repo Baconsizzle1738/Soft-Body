@@ -68,9 +68,9 @@ public class MassPoint extends Interactable{
 
 	@Override
 	public void tick() {
-		if (Runner.gravity) {
-			forces.add(new Force(mass*0.163333f, (float)Math.PI/2));
-		}
+//		if (Runner.gravity) {
+//			forces.add(new Force(mass*0.163333f, (float)Math.PI/2));
+//		}
 		
 		float accelerationX = netForceX()/mass;
 		float accelerationY = netForceY()/mass;

@@ -17,7 +17,7 @@ public class Scene extends Updateable{
 //		MassPoint m = new MassPoint(100, 100);
 //		m.addForce(new Force(0.098f, 0f));
 		MassPoint m1 = new MassPoint(100, 100);
-		MassPoint m2 = new MassPoint(100, 300);
+		MassPoint m2 = new MassPoint(100, 500);
 		
 		Spring s = new Spring(75f, 0.05f, m1, m2);
 		

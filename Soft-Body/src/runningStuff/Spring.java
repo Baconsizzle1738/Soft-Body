@@ -54,7 +54,7 @@ public class Spring extends Interactable{
 		
 		
 		p1.addForce(new Force(force, angleP1(), ForceOrigin.Gravity));
-		p2.addForce(new Force(force, angleP2(), ForceOrigin.Gravity));
+		p2.addForce(new Force(force, angleP1()-(float)Math.PI, ForceOrigin.Gravity));
 		
 //		if (length > rest) {
 //			

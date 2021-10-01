@@ -76,12 +76,12 @@ public class MassPoint extends Interactable{
 		float accelerationY = netForceY()/mass;
 		
 		xVol+=accelerationX;
-		yVol-=accelerationY;
+		yVol+=accelerationY;
 		
 		
 		//subtract y vol because the canvas has origin at the top of the page
 		x+=xVol;
-		y-=yVol;
+		y+=yVol;
 		
 		clearForces();
 	}
@@ -90,6 +90,10 @@ public class MassPoint extends Interactable{
 	public void render(Graphics g) {
 		g.setColor(new Color(200, 0, 0));
 		g.fillOval((int)x-5, (int)y-5, 10, 10);
+	}
+	
+	public String toString() {
+		return x + "," + y + " " + forces;
 	}
 
 }

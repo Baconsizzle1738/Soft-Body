@@ -16,10 +16,10 @@ public class Scene extends Updateable{
 		
 //		MassPoint m = new MassPoint(100, 100);
 //		m.addForce(new Force(0.098f, 0f));
-		MassPoint m1 = new MassPoint(200, 100);
+		MassPoint m1 = new MassPoint(300, 300);
 		MassPoint m2 = new MassPoint(200, 500);
 		
-		Spring s = new Spring(300f, 0.05f, m1, m2);
+		Spring s = new Spring(300f, 0.005f, m1, m2);
 		
 //		m1.addForce(new Force(0.098f, (float)Math.PI*0.5f));
 //		MassPoint m2 = new MassPoint(100, 102);
@@ -35,7 +35,8 @@ public class Scene extends Updateable{
 	
 	@Override
 	public void tick() {
-		
+		System.out.println(handler.getObjects().get(1));
+		System.out.println(handler.getObjects().get(0));
 	}
 
 	@Override

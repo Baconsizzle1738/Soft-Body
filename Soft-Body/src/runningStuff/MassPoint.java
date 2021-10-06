@@ -7,11 +7,11 @@ import java.util.LinkedList;
 
 public class MassPoint extends Interactable{
 	
-	private float x, y, xVol, yVol, mass;
+	private double x, y, xVol, yVol, mass;
 	
 	private LinkedList<Force> forces;
 	
-	public MassPoint(float x, float y){
+	public MassPoint(double x, double y){
 		
 		this.x = x;
 		this.y = y;
@@ -28,8 +28,8 @@ public class MassPoint extends Interactable{
 		forces.clear();
 	}
 	
-	private float netForceX() {
-		float magnitudeX = 0;
+	private double netForceX() {
+		double magnitudeX = 0;
 		
 		for (int i = 0; i<forces.size(); i++) {
 			magnitudeX+=forces.get(i).getXComponent();
@@ -48,8 +48,8 @@ public class MassPoint extends Interactable{
 		return (int)y;
 	}
 	
-	private float netForceY() {
-		float magnitudeY = 0;
+	private double netForceY() {
+		double magnitudeY = 0;
 		
 		for (int i = 0; i<forces.size(); i++) {
 			magnitudeY+=forces.get(i).getYComponent();
@@ -69,11 +69,11 @@ public class MassPoint extends Interactable{
 	@Override
 	public void tick() {
 //		if (Runner.gravity) {
-//			forces.add(new Force(mass*0.163333f, (float)Math.PI/2));
+//			forces.add(new Force(mass*0.163333f, (double)Math.PI/2));
 //		}
 		
-		float accelerationX = netForceX()/mass;
-		float accelerationY = netForceY()/mass;
+		double accelerationX = netForceX()/mass;
+		double accelerationY = netForceY()/mass;
 		
 		xVol+=accelerationX;
 		yVol+=accelerationY;

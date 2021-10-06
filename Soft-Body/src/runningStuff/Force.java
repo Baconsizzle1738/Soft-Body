@@ -2,23 +2,23 @@ package runningStuff;
 
 public class Force {
 	
-	private float magnitude, angle;
+	private double magnitude, angle;
 	
 	ForceOrigin origin;
 	
-	public Force(float mag, float rad, ForceOrigin o) {
+	public Force(double mag, double rad, ForceOrigin o) {
 		magnitude = mag;
 		angle = rad;
 		origin = o;
 	}
 	
 	
-	public float getYComponent() {
-		return (float)Math.sin((double)angle)*magnitude;
+	public double getYComponent() {
+		return (double)Math.sin((double)angle)*magnitude;
 	}
 	
-	public float getXComponent() {
-		return (float)Math.cos((double)angle)*magnitude;
+	public double getXComponent() {
+		return (double)Math.cos((double)angle)*magnitude;
 	}
 	
 	public ForceOrigin getOrigin() {

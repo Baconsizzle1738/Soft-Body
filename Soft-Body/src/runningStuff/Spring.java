@@ -6,14 +6,14 @@ import java.awt.Rectangle;
 
 public class Spring extends Interactable{
 	
-	private float rest, length, k, force;
+	private double rest, length, k, force;
 	
 	private MassPoint p1, p2;
 	
-	public Spring (float rest, float Kcons, MassPoint p1, MassPoint p2) {
+	public Spring (double rest, double Kcons, MassPoint p1, MassPoint p2) {
 		
 		this.rest = rest;
-		length = (float) Math.abs(Math.sqrt(Math.pow((p1.getX()-p2.getX()), 2) + Math.pow((p1.getY()-p2.getY()), 2)));
+		length = (double) Math.abs(Math.sqrt(Math.pow((p1.getX()-p2.getX()), 2) + Math.pow((p1.getY()-p2.getY()), 2)));
 		k = Kcons;
 		this.p1 = p1;
 		this.p2 = p2;
@@ -21,20 +21,20 @@ public class Spring extends Interactable{
 		
 	}
 	
-	private float angleP1() {
+	private double angleP1() {
 		//calculate angle relative to p1
-		float xlen = p2.getX() - p1.getX();
-		float ylen = p2.getY() - p1.getY();
-		float rad = (float)Math.atan(ylen/xlen);
-		//Force xForce = new Force((float)Math.cos(rad)*force, 0);
+		double xlen = p2.getX() - p1.getX();
+		double ylen = p2.getY() - p1.getY();
+		double rad = (double)Math.atan(ylen/xlen);
+		//Force xForce = new Force((double)Math.cos(rad)*force, 0);
 		
 		return rad;
 	}
 	
-	private float angleP2() {
-		float xlen = p1.getX() - p2.getX();
-		float ylen = p1.getY() - p2.getY();
-		float rad = (float)Math.atan(ylen/xlen);
+	private double angleP2() {
+		double xlen = p1.getX() - p2.getX();
+		double ylen = p1.getY() - p2.getY();
+		double rad = (double)Math.atan(ylen/xlen);
 		
 		return rad;
 		
@@ -48,20 +48,20 @@ public class Spring extends Interactable{
 	@Override
 	public void tick() {
 		
-		length = (float) Math.abs(Math.sqrt(Math.pow((p1.getX()-p2.getX()), 2) + Math.pow((p1.getY()-p2.getY()), 2)));
+		length = (double) Math.abs(Math.sqrt(Math.pow((p1.getX()-p2.getX()), 2) + Math.pow((p1.getY()-p2.getY()), 2)));
 		force = (length - rest)*k;
 //		force -= force*0.0001;
 		
 		
 		p1.addForce(new Force(force, angleP1(), ForceOrigin.Gravity));
-		p2.addForce(new Force(force, angleP1()-(float)Math.PI, ForceOrigin.Gravity));
+		p2.addForce(new Force(force, angleP1()-(double)Math.PI, ForceOrigin.Gravity));
 		
 //		if (length > rest) {
 //			
 //		}
 //		else {
-//			p1.addForce(new Force(force, angleP1()+(float)Math.PI, ForceOrigin.Gravity));
-//			p2.addForce(new Force(force, angleP2()+(float)Math.PI, ForceOrigin.Gravity));
+//			p1.addForce(new Force(force, angleP1()+(double)Math.PI, ForceOrigin.Gravity));
+//			p2.addForce(new Force(force, angleP2()+(double)Math.PI, ForceOrigin.Gravity));
 //		}
 		
 		

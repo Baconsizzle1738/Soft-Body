@@ -6,7 +6,7 @@ import java.awt.Rectangle;
 
 public class Spring extends Interactable{
 	
-	private double rest, length, k, force;
+	private double rest, length, k, forceMag;
 	
 	private MassPoint p1, p2;
 	
@@ -17,7 +17,7 @@ public class Spring extends Interactable{
 		k = Kcons;
 		this.p1 = p1;
 		this.p2 = p2;
-		force = Math.abs((this.rest-length)*k);
+		forceMag = Math.abs((this.rest-length)*k);
 		
 	}
 	
@@ -49,12 +49,12 @@ public class Spring extends Interactable{
 	public void tick() {
 		
 		length = (double) Math.abs(Math.sqrt(Math.pow((p1.getX()-p2.getX()), 2) + Math.pow((p1.getY()-p2.getY()), 2)));
-		force = (length - rest)*k;
+		forceMag = (length - rest)*k;
 //		force -= force*0.0001;
 		
 		
-		p1.addForce(new Force(force, angleP1(), ForceOrigin.Gravity));
-		p2.addForce(new Force(force, angleP1()-(double)Math.PI, ForceOrigin.Gravity));
+		p1.addForce(new Force(forceMag, angleP1(), ForceOrigin.Gravity));
+		p2.addForce(new Force(forceMag, angleP1()-(double)Math.PI, ForceOrigin.Gravity));
 		
 //		if (length > rest) {
 //			

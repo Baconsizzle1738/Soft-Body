@@ -126,6 +126,14 @@ public class Runner extends Canvas implements Runnable{
 		bs.show();
 	}
 	
+	public static double truncate (double d) {
+		Double round = d;
+		round*=1000;
+		int t = round.intValue();
+		round = (double)t/1000;
+		return round;
+	}
+	
 	public static void main(String[] args) {
 		new Runner();
 	}

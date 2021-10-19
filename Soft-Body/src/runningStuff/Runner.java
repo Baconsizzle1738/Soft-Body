@@ -126,12 +126,24 @@ public class Runner extends Canvas implements Runnable{
 		bs.show();
 	}
 	
-	public static double truncate (double d) {
+	
+	/**
+	 * rounds to nearest ten thousandth
+	 * @param d Number to be rounded
+	 * @return Rounded number
+	 */
+	public static double round (double d) {
+		
 		Double round = d;
-		round*=1000;
+		round*=10000;
 		int t = round.intValue();
-		round = (double)t/1000;
-		return round;
+		double deci = round-t;
+		if (deci>0.5) {
+			t++;
+		}
+		
+		return (double)t/10000;
+		
 	}
 	
 	public static void main(String[] args) {

@@ -25,7 +25,7 @@ public class Spring extends Interactable{
 		//calculate angle relative to p1
 		double xlen = p2.getX() - p1.getX();
 		double ylen = p2.getY() - p1.getY();
-		double rad = (double)Math.atan(ylen/xlen);
+		double rad = Runner.round((double)Math.atan(ylen/xlen));
 		//Force xForce = new Force((double)Math.cos(rad)*force, 0);
 		
 		return rad;
@@ -34,7 +34,7 @@ public class Spring extends Interactable{
 	private double angleP2() {
 		double xlen = p1.getX() - p2.getX();
 		double ylen = p1.getY() - p2.getY();
-		double rad = (double)Math.atan(ylen/xlen);
+		double rad = Runner.round((double)Math.atan(ylen/xlen));
 		
 		return rad;
 		
@@ -48,7 +48,7 @@ public class Spring extends Interactable{
 	@Override
 	public void tick() {
 		
-		length = (double) Math.abs(Math.sqrt(Math.pow((p1.getX()-p2.getX()), 2) + Math.pow((p1.getY()-p2.getY()), 2)));
+		length = Runner.round((double) Math.abs(Math.sqrt(Math.pow((p1.getX()-p2.getX()), 2) + Math.pow((p1.getY()-p2.getY()), 2))));
 		forceMag = (length - rest)*k;
 //		force -= force*0.0001;
 		

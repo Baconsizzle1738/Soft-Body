@@ -32,7 +32,7 @@ public class MassPoint extends Interactable{
 		double magnitudeX = 0;
 		
 		for (int i = 0; i<forces.size(); i++) {
-			magnitudeX+=forces.get(i).getXComponent();
+			magnitudeX+=Runner.round(forces.get(i).getXComponent());
 		}
 		
 		return magnitudeX;
@@ -51,7 +51,7 @@ public class MassPoint extends Interactable{
 		double magnitudeY = 0;
 		
 		for (int i = 0; i<forces.size(); i++) {
-			magnitudeY+=forces.get(i).getYComponent();
+			magnitudeY+=Runner.round(forces.get(i).getYComponent());
 		}
 		
 		
@@ -78,12 +78,8 @@ public class MassPoint extends Interactable{
 		yVol+=accelerationY;
 		
 		
-		//subtract y vol because the canvas has origin at the top of the page
 		x+=xVol;
 		y+=yVol;
-		
-		Math.floor(x);
-		Math.floor(y);
 		
 		clearForces();
 	}

@@ -80,6 +80,8 @@ public class MassPoint extends Interactable{
 		
 		x+=xVol;
 		y+=yVol;
+		x = Runner.round(x);
+		y = Runner.round(y);
 		
 		clearForces();
 	}

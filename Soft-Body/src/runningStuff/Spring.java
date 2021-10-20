@@ -49,12 +49,12 @@ public class Spring extends Interactable{
 	public void tick() {
 		
 		length = Runner.round((double) Math.abs(Math.sqrt(Math.pow((p1.getX()-p2.getX()), 2) + Math.pow((p1.getY()-p2.getY()), 2))));
-		forceMag = (length - rest)*k;
+		forceMag = Runner.round((length - rest)*k);
 //		force -= force*0.0001;
 		
 		
 		p1.addForce(new Force(forceMag, angleP1(), ForceOrigin.Gravity));
-		p2.addForce(new Force(forceMag, angleP1()-(double)Math.PI, ForceOrigin.Gravity));
+		p2.addForce(new Force(forceMag, Runner.round(angleP1()-(double)Math.PI), ForceOrigin.Gravity));
 		
 //		if (length > rest) {
 //			

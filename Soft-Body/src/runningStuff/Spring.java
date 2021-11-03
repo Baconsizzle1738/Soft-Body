@@ -3,29 +3,30 @@ package runningStuff;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.math.BigDecimal;
 
 public class Spring extends Interactable{
 	
-	private double rest, length, k, forceMag;
+	private BigDecimal rest, length, k, forceMag;
 	
 	private MassPoint p1, p2;
 	
-	public Spring (double rest, double Kcons, MassPoint p1, MassPoint p2) {
+	public Spring (BigDecimal rest, BigDecimal Kcons, MassPoint p1, MassPoint p2) {
 		
 		this.rest = rest;
-		length = (double) Math.abs(Math.sqrt(Math.pow((p1.getX()-p2.getX()), 2) + Math.pow((p1.getY()-p2.getY()), 2)));
+		length = BigDecimal.valueOf((double) Math.abs(Math.sqrt(Math.pow((p1.getX()-p2.getX()), 2) + Math.pow((p1.getY()-p2.getY()), 2))));
 		k = Kcons;
 		this.p1 = p1;
 		this.p2 = p2;
-		forceMag = Math.abs((this.rest-length)*k);
+		forceMag = ((this.rest.subtract(length)).multiply(k)).abs();
 		
 	}
 	
-	private double angleP1() {
+	private BigDecimal angleP1() {
 		//calculate angle relative to p1
-		double xlen = p2.getX() - p1.getX();
-		double ylen = p2.getY() - p1.getY();
-		double rad = Runner.round((double)Math.atan(ylen/xlen));
+		BigDecimal xlen = BigDecimal.valueOf(p2.getX() - p1.getX());
+		BigDecimal ylen = BigDecimal.valueOf(p2.getY() - p1.getY());
+		BigDecimal rad = BigDecimal.valueOf(Math.atan(ylen.divide(xlen).doubleValue()));
 		//Force xForce = new Force((double)Math.cos(rad)*force, 0);
 		
 		return rad;
@@ -48,7 +49,7 @@ public class Spring extends Interactable{
 	@Override
 	public void tick() {
 		
-		length = Runner.round((double) Math.abs(Math.sqrt(Math.pow((p1.getX()-p2.getX()), 2) + Math.pow((p1.getY()-p2.getY()), 2))));
+		length = (double) Math.abs(Math.sqrt(Math.pow((p1.getX()-p2.getX()), 2) + Math.pow((p1.getY()-p2.getY()), 2)));
 		forceMag = Runner.round((length - rest)*k);
 //		force -= force*0.0001;
 		

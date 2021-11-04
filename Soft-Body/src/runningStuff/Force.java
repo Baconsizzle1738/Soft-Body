@@ -1,12 +1,14 @@
 package runningStuff;
 
+import java.math.BigDecimal;
+
 public class Force {
 	
-	private double magnitude, angle;
+	private BigDecimal magnitude, angle;
 	
 	ForceOrigin origin;
 	
-	public Force(double mag, double rad, ForceOrigin o) {
+	public Force(BigDecimal mag, BigDecimal rad, ForceOrigin o) {
 		magnitude = mag;
 		angle = rad;
 		origin = o;
@@ -17,8 +19,8 @@ public class Force {
 		return (double)Math.sin((double)angle)*magnitude;
 	}
 	
-	public double getXComponent() {
-		return (double)Math.cos((double)angle)*magnitude;
+	public BigDecimal getXComponent() {
+		return BigDecimal.valueOf(BigDecimal.valueOf(Math.cos(angle.doubleValue())).multiply(magnitude).doubleValue());
 	}
 	
 	public ForceOrigin getOrigin() {

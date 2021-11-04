@@ -1,6 +1,7 @@
 package runningStuff;
 
 import java.awt.Graphics;
+import java.math.BigDecimal;
 
 public class Scene extends Updateable{
 	
@@ -21,7 +22,7 @@ public class Scene extends Updateable{
 //		MassPoint m3 = new MassPoint(100, 200);
 //		MassPoint m4 = new MassPoint(200, 200);
 		
-		Spring s = new Spring(100f, 0.05f, m1, m2);
+		Spring s = new Spring(BigDecimal.valueOf(100), BigDecimal.valueOf(0.05), m1, m2);
 //		Spring s2 = new Spring(100f, 0.05f, m2, m3);
 //		Spring s3 = new Spring(100f, 0.05f, m3, m4);
 //		Spring s4 = new Spring(100f, 0.05f, m4, m1);

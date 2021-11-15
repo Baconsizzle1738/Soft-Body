@@ -4,6 +4,10 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.math.MathContext;
+import java.math.RoundingMode;
 
 /**
  * Some code is copied from FBLA game project.
@@ -15,6 +19,8 @@ public class Runner extends Canvas implements Runnable{
 	/**
 	 * 
 	 */
+	public static final BigDecimal PI = new BigDecimal("3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679");
+	
 	private static final long serialVersionUID = 1L;
 	
 	public static final int WIDTH = 800;
@@ -148,6 +154,21 @@ public class Runner extends Canvas implements Runnable{
 	
 	public static void main(String[] args) {
 		new Runner();
+		
+		System.out.println(sin(PI));
+	}
+	
+	public static BigDecimal sin(BigDecimal in) {
+		BigDecimal modd = in.add(PI).remainder(PI.multiply(BigDecimal.valueOf(2))).subtract(PI);
+		
+		//up to 7th power
+		BigDecimal firstPart = modd.subtract(modd.pow(3).divide(BigDecimal.valueOf(6), MathContext.DECIMAL128)).add(modd.pow(5).divide(BigDecimal.valueOf(120), MathContext.DECIMAL128)).subtract(modd.pow(7).divide(BigDecimal.valueOf(5040), MathContext.DECIMAL128));
+		
+		//from 7th power to 13
+		BigDecimal finalPart = firstPart.add(modd.pow(9).divide(BigDecimal.valueOf(362880), MathContext.DECIMAL128)).subtract(modd.pow(11).divide(BigDecimal.valueOf(39916800), MathContext.DECIMAL128)).add(modd.pow(13).divide(BigDecimal.valueOf(6227020800L), MathContext.DECIMAL128));
+		
+		return finalPart;
+		
 	}
 
 }

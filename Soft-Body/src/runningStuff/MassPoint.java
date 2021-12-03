@@ -3,6 +3,7 @@ package runningStuff;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.math.BigDecimal;
 import java.util.LinkedList;
 
 public class MassPoint extends Interactable{
@@ -28,11 +29,11 @@ public class MassPoint extends Interactable{
 		forces.clear();
 	}
 	
-	private double netForceX() {
-		double magnitudeX = 0;
+	private BigDecimal netForceX() {
+		BigDecimal magnitudeX = new BigDecimal(0);
 		
 		for (int i = 0; i<forces.size(); i++) {
-			magnitudeX+=Runner.round(forces.get(i).getXComponent());
+			magnitudeX.add(forces.get(i).getXComponent());
 		}
 		
 		return magnitudeX;

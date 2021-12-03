@@ -170,5 +170,10 @@ public class Runner extends Canvas implements Runnable{
 		return finalPart;
 		
 	}
-
+	
+	public static BigDecimal cos(BigDecimal in) {
+		BigDecimal modd = in.add(PI).remainder(PI.multiply(BigDecimal.valueOf(2))).subtract(PI);
+		
+		
+	}
 }

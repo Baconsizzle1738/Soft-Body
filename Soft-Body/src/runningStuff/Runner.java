@@ -19,7 +19,7 @@ public class Runner extends Canvas implements Runnable{
 	/**
 	 * 
 	 */
-	public static final BigDecimal PI = new BigDecimal("3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679");
+	public static final BigDecimal PI = new BigDecimal("3.1415926535897932384626433832795");
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -174,10 +174,16 @@ public class Runner extends Canvas implements Runnable{
 	public static BigDecimal cos(BigDecimal in) {
 		BigDecimal modd = in.add(PI).remainder(PI.multiply(BigDecimal.valueOf(2))).subtract(PI);
 		
-		BigDecimal firstPart = BigDecimal.valueOf(1).subtract(modd.pow(2).divide(BigDecimal.valueOf(2))).add(modd.pow(4).divide(BigDecimal.valueOf(24)));
+		//up to 8th polynomial
+		BigDecimal firstPart = BigDecimal.valueOf(1).subtract(modd.pow(2).divide(BigDecimal.valueOf(2), MathContext.DECIMAL128)).add(modd.pow(4).divide(BigDecimal.valueOf(24), MathContext.DECIMAL128)).subtract(modd.pow(6).divide(BigDecimal.valueOf(720), MathContext.DECIMAL128)).add(modd.pow(8).divide(BigDecimal.valueOf(40320), MathContext.DECIMAL128));
 		
-		return null;
+		//to 16th polynomial
+		BigDecimal finalPart = firstPart.subtract(modd.pow(10).divide(BigDecimal.valueOf(3628800), MathContext.DECIMAL128)).add(modd.pow(12).divide(BigDecimal.valueOf(479001600), MathContext.DECIMAL128)).subtract(modd.pow(14).divide(BigDecimal.valueOf(87178291200L), MathContext.DECIMAL128)).add(modd.pow(16).divide(BigDecimal.valueOf(20922789888000L), MathContext.DECIMAL128));
 		
-		
+		return finalPart;
+	}
+	
+	public static BigDecimal tan(BigDecimal in) {
+		return sin(in).divide(cos(in), MathContext.DECIMAL128);
 	}
 }

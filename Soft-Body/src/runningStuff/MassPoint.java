@@ -48,11 +48,12 @@ public class MassPoint extends Interactable{
 		return (int)y;
 	}
 	
-	private double netForceY() {
-		double magnitudeY = 0;
+	private BigDecimal netForceY() {
+		BigDecimal magnitudeY = new BigDecimal(0);
 		
 		for (int i = 0; i<forces.size(); i++) {
-			magnitudeY+=Runner.round(forces.get(i).getYComponent());
+			magnitudeY.add(forces.get(i).getYComponent());
+			//System.out.println(magnitudeY);
 		}
 		
 		
@@ -72,12 +73,12 @@ public class MassPoint extends Interactable{
 //			forces.add(new Force(mass*0.163333f, (double)Math.PI/2));
 //		}
 		
-		double accelerationX = netForceX()/mass;
-		double accelerationY = netForceY()/mass;
+		double accelerationX = netForceX().doubleValue()/mass;
+		double accelerationY = netForceY().doubleValue()/mass;
 		
 		xVol+=accelerationX;
 		yVol+=accelerationY;
-		
+		//System.out.println(netForceX());
 		
 		x+=xVol;
 		y+=yVol;

@@ -15,12 +15,12 @@ public class Force {
 	}
 	
 	
-	public double getYComponent() {
-		return (double)Math.sin((double)angle)*magnitude;
+	public BigDecimal getYComponent() {
+		return Runner.sin(angle).multiply(magnitude);
 	}
 	
 	public BigDecimal getXComponent() {
-		return BigDecimal.valueOf(BigDecimal.valueOf(Math.cos(angle.doubleValue())).multiply(magnitude).doubleValue());
+		return Runner.cos(angle).multiply(magnitude);
 	}
 	
 	public ForceOrigin getOrigin() {

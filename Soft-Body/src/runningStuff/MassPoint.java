@@ -33,9 +33,9 @@ public class MassPoint extends Interactable{
 		BigDecimal magnitudeX = new BigDecimal(0);
 		
 		for (int i = 0; i<forces.size(); i++) {
-			magnitudeX.add(forces.get(i).getXComponent());
+			magnitudeX = magnitudeX.add(forces.get(i).getXComponent());
 		}
-		
+		//System.out.println(magnitudeX);
 		return magnitudeX;
 		
 	}
@@ -52,7 +52,7 @@ public class MassPoint extends Interactable{
 		BigDecimal magnitudeY = new BigDecimal(0);
 		
 		for (int i = 0; i<forces.size(); i++) {
-			magnitudeY.add(forces.get(i).getYComponent());
+			magnitudeY = magnitudeY.add(forces.get(i).getYComponent());
 			//System.out.println(magnitudeY);
 		}
 		
@@ -82,8 +82,8 @@ public class MassPoint extends Interactable{
 		
 		x+=xVol;
 		y+=yVol;
-		x = Runner.round(x);
-		y = Runner.round(y);
+//		x = Runner.round(x);
+//		y = Runner.round(y);
 		
 		clearForces();
 	}

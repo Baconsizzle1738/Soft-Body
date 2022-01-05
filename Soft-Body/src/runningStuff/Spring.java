@@ -27,7 +27,15 @@ public class Spring extends Interactable{
 		//calculate angle relative to p1
 		BigDecimal xlen = BigDecimal.valueOf(p2.getX() - p1.getX());
 		BigDecimal ylen = BigDecimal.valueOf(p2.getY() - p1.getY());
-		BigDecimal rad = BigDecimal.valueOf(Math.atan(ylen.divide(xlen, MathContext.DECIMAL128).doubleValue()));
+		
+		BigDecimal rad = new BigDecimal(0);
+		if (xlen.equals(BigDecimal.valueOf(0))) {
+			rad = Runner.PI.divide(BigDecimal.valueOf(2));
+		}
+		else {
+			rad = BigDecimal.valueOf(Math.atan(ylen.divide(xlen, MathContext.DECIMAL128).doubleValue()));
+		}
+		
 		
 		//Force xForce = new Force((double)Math.cos(rad)*force, 0);
 		
@@ -37,8 +45,14 @@ public class Spring extends Interactable{
 	private BigDecimal angleP2() {
 		BigDecimal xlen = BigDecimal.valueOf(p1.getX() - p2.getX());
 		BigDecimal ylen = BigDecimal.valueOf(p1.getY() - p2.getY());
-		BigDecimal rad = BigDecimal.valueOf(Math.atan(xlen.divide(ylen, MathContext.DECIMAL128).doubleValue()));
 		
+		BigDecimal rad = new BigDecimal(0);
+		if (xlen.equals(BigDecimal.valueOf(0))) {
+			rad = Runner.PI.divide(BigDecimal.valueOf(2));
+		}
+		else {
+			rad = BigDecimal.valueOf(Math.atan(ylen.divide(xlen, MathContext.DECIMAL128).doubleValue()));
+		}
 		return rad;
 		
 	}

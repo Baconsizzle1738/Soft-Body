@@ -85,6 +85,9 @@ public class MassPoint extends Interactable{
 //		x = Runner.round(x);
 //		y = Runner.round(y);
 		
+//		System.out.println(accelerationX);
+//		System.out.println(accelerationY);
+		
 		clearForces();
 	}
 

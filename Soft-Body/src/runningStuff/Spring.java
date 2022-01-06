@@ -19,7 +19,7 @@ public class Spring extends Interactable{
 		k = Kcons;
 		this.p1 = p1;
 		this.p2 = p2;
-		forceMag = ((this.rest.subtract(length)).multiply(k)).abs();
+		forceMag = ((this.rest.subtract(length)).multiply(k));
 		
 	}
 	
@@ -65,13 +65,13 @@ public class Spring extends Interactable{
 	@Override
 	public void tick() {
 		
-		length = BigDecimal.valueOf((double) Math.abs(Math.sqrt(Math.pow((p1.getX()-p2.getX()), 2) + Math.pow((p1.getY()-p2.getY()), 2))));
+		length = BigDecimal.valueOf((double) Math.abs(Math.sqrt(Math.pow((p2.getX()-p1.getX()), 2) + Math.pow((p2.getY()-p1.getY()), 2))));
 		forceMag = (length.subtract(rest)).multiply(k);
 //		force -= force*0.0001;
 		
 		
 		p1.addForce(new Force(forceMag, angleP1(), ForceOrigin.Gravity));
-		p2.addForce(new Force(forceMag, angleP2().subtract(BigDecimal.valueOf(Math.PI)), ForceOrigin.Gravity));
+		p2.addForce(new Force(forceMag.negate(), angleP2(), ForceOrigin.Gravity));
 		
 //		if (length > rest) {
 //			

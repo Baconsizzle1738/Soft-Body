@@ -17,8 +17,8 @@ public class Scene extends Updateable{
 		
 //		MassPoint m = new MassPoint(100, 100);
 //		m.addForce(new Force(0.098f, 0f));
-		MassPoint m1 = new MassPoint(100, 50);
-		MassPoint m2 = new MassPoint(50, 200);
+		MassPoint m1 = new MassPoint(50, 200);
+		MassPoint m2 = new MassPoint(100, 50);
 //		MassPoint m3 = new MassPoint(100, 200);
 //		MassPoint m4 = new MassPoint(200, 200);
 		

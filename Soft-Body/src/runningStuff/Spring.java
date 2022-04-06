@@ -29,10 +29,14 @@ public class Spring extends Interactable{
 		BigDecimal ylen = BigDecimal.valueOf(p2.getY() - p1.getY());
 		
 		BigDecimal rad = new BigDecimal(0);
-		if (xlen.equals(BigDecimal.valueOf(0))) {
+		if (xlen.equals(BigDecimal.valueOf(0)) && ylen.compareTo(BigDecimal.valueOf(0))>0) {
 			rad = Runner.PI.divide(BigDecimal.valueOf(2));
 		}
+		else if (xlen.equals(BigDecimal.valueOf(0)) && ylen.compareTo(BigDecimal.valueOf(0))<0) {
+			rad = Runner.PI.divide(BigDecimal.valueOf(-2));
+		}
 		else {
+			//bug might be here but is too late reee
 			rad = BigDecimal.valueOf(Math.atan(ylen.divide(xlen, MathContext.DECIMAL128).doubleValue()));
 		}
 		

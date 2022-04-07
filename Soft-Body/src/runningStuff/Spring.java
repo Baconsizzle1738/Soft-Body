@@ -35,6 +35,10 @@ public class Spring extends Interactable{
 		else if (xlen.equals(BigDecimal.valueOf(0)) && ylen.compareTo(BigDecimal.valueOf(0))<0) {
 			rad = Runner.PI.divide(BigDecimal.valueOf(-2));
 		}
+		
+		if (xlen.floatValue() < 0) {
+			rad = BigDecimal.valueOf(Math.atan(ylen.divide(xlen, MathContext.DECIMAL128).doubleValue())).add(Runner.PI);
+		}
 		else {
 			//bug might be here but is too late reee
 			rad = BigDecimal.valueOf(Math.atan(ylen.divide(xlen, MathContext.DECIMAL128).doubleValue()));

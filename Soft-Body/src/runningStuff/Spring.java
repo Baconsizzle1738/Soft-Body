@@ -8,12 +8,13 @@ import java.math.MathContext;
 
 public class Spring extends Interactable{
 	
-	private BigDecimal rest, length, k, forceMag;
+	private BigDecimal rest, length, k, forceMag, kd;
 	
 	private MassPoint p1, p2;
 	
 	public Spring (BigDecimal rest, BigDecimal Kcons, MassPoint p1, MassPoint p2) {
 		
+		kd = BigDecimal.valueOf(0.0004);
 		this.rest = rest;
 		length = BigDecimal.valueOf((double) Math.abs(Math.sqrt(Math.pow((p1.getX()-p2.getX()), 2) + Math.pow((p1.getY()-p2.getY()), 2))));
 		k = Kcons;
@@ -36,7 +37,7 @@ public class Spring extends Interactable{
 			rad = Runner.PI.divide(BigDecimal.valueOf(-2));
 		}
 		
-		if (xlen.floatValue() < 0) {
+		else if (xlen.floatValue() < 0) {
 			rad = BigDecimal.valueOf(Math.atan(ylen.divide(xlen, MathContext.DECIMAL128).doubleValue())).add(Runner.PI);
 		}
 		else {
@@ -76,6 +77,7 @@ public class Spring extends Interactable{
 		length = BigDecimal.valueOf((double) Math.abs(Math.sqrt(Math.pow((p2.getX()-p1.getX()), 2) + Math.pow((p2.getY()-p1.getY()), 2))));
 		forceMag = (length.subtract(rest)).multiply(k);
 //		force -= force*0.0001;
+		
 		
 		
 		p1.addForce(new Force(forceMag, angleP1(), ForceOrigin.Gravity));

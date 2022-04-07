@@ -40,12 +40,22 @@ public class MassPoint extends Interactable{
 		
 	}
 	
+	//get x and y
 	public int getX() {
 		return (int)x;
 	}
 	
 	public int getY() {
 		return (int)y;
+	}
+	
+	//get velocity
+	public BigDecimal getVolX() {
+		return BigDecimal.valueOf(xVol);
+	}
+	
+	public BigDecimal getVolY() {
+		return BigDecimal.valueOf(yVol);
 	}
 	
 	private BigDecimal netForceY() {

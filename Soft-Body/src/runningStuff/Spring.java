@@ -14,7 +14,7 @@ public class Spring extends Interactable{
 	
 	public Spring (BigDecimal rest, BigDecimal Kcons, MassPoint p1, MassPoint p2) {
 		
-		kd = BigDecimal.valueOf(0.0004);
+		kd = BigDecimal.valueOf(0.4);
 		this.rest = rest;
 		length = BigDecimal.valueOf((double) Math.abs(Math.sqrt(Math.pow((p1.getX()-p2.getX()), 2) + Math.pow((p1.getY()-p2.getY()), 2))));
 		k = Kcons;
@@ -69,6 +69,12 @@ public class Spring extends Interactable{
 		
 	}
 	
+	private BigDecimal damperMag() {
+		BigDecimal neg = length.divide(length.abs());
+		BigDecimal diff = p2.getVolMag().subtract(p1.getVolMag());
+		return neg.multiply(diff).multiply(kd);
+	}
+	
 	@Override
 	public Rectangle getBounds() {
 		return null;
@@ -82,10 +88,11 @@ public class Spring extends Interactable{
 //		force -= force*0.0001;
 		
 		
-		
 		p1.addForce(new Force(forceMag, angleP1(), ForceOrigin.Gravity));
 		p2.addForce(new Force(forceMag.negate(), angleP1(), ForceOrigin.Gravity));
 		 
+		p1.addForce(new Force(damperMag(), angleP1(), ForceOrigin.Gravity));
+		p2.addForce(new Force(damperMag().negate(), angleP1(), ForceOrigin.Gravity));
 //		if (length > rest) {
 //			
 //		}

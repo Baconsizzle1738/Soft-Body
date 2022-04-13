@@ -50,12 +50,17 @@ public class MassPoint extends Interactable{
 	}
 	
 	//get velocity
-	public BigDecimal getVolX() {
-		return BigDecimal.valueOf(xVol);
+	public double getVolX() {
+		return xVol;
 	}
 	
-	public BigDecimal getVolY() {
-		return BigDecimal.valueOf(yVol);
+	public double getVolY() {
+		return yVol;
+	}
+	
+	public BigDecimal getVolMag() {
+		double mag = Math.sqrt(Math.pow(xVol, 2) + Math.pow(yVol, 2));
+		return BigDecimal.valueOf(mag);
 	}
 	
 	private BigDecimal netForceY() {

@@ -14,7 +14,7 @@ public class Spring extends Interactable{
 	
 	public Spring (BigDecimal rest, BigDecimal Kcons, MassPoint p1, MassPoint p2) {
 		
-		kd = BigDecimal.valueOf(0.4);
+		kd = BigDecimal.valueOf(0.04);
 		this.rest = rest;
 		length = BigDecimal.valueOf((double) Math.abs(Math.sqrt(Math.pow((p1.getX()-p2.getX()), 2) + Math.pow((p1.getY()-p2.getY()), 2))));
 		k = Kcons;
@@ -69,10 +69,31 @@ public class Spring extends Interactable{
 		
 	}
 	
+//	private BigDecimal damperMag() {
+//		BigDecimal neg = length.divide(length.abs());
+//		BigDecimal diff = p2.getVolMag().subtract(p1.getVolMag());
+//		return neg.multiply(diff).multiply(kd);
+//	}
+	
 	private BigDecimal damperMag() {
-		BigDecimal neg = length.divide(length.abs());
-		BigDecimal diff = p2.getVolMag().subtract(p1.getVolMag());
-		return neg.multiply(diff).multiply(kd);
+		//difference of velocity vectors
+		BigDecimal vectorX = BigDecimal.valueOf(p1.getVolX()-p2.getVolX());
+		BigDecimal vectorY = BigDecimal.valueOf(p1.getVolY()-p2.getVolY());
+		
+		//normal vector
+		BigDecimal nMag = length.divide(length.abs());
+		BigDecimal nAng = angleP1().add(Runner.PI);
+		
+		//normal x and y
+		BigDecimal xMag = nMag.multiply(Runner.cos(nAng));
+		BigDecimal yMag = nMag.multiply(Runner.sin(nAng));
+		
+		//dot product
+		vectorX = vectorX.multiply(xMag);
+		vectorY = vectorY.multiply(yMag);
+		
+		
+		return (vectorX.add(vectorY)).multiply(kd);
 	}
 	
 	@Override
@@ -90,9 +111,14 @@ public class Spring extends Interactable{
 		
 		p1.addForce(new Force(forceMag, angleP1(), ForceOrigin.Gravity));
 		p2.addForce(new Force(forceMag.negate(), angleP1(), ForceOrigin.Gravity));
-		 
+		
+		
+		//damping force
 		p1.addForce(new Force(damperMag(), angleP1(), ForceOrigin.Gravity));
 		p2.addForce(new Force(damperMag().negate(), angleP1(), ForceOrigin.Gravity));
+		
+		
+		
 //		if (length > rest) {
 //			
 //		}

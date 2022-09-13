@@ -155,19 +155,50 @@ public class Runner extends Canvas implements Runnable{
 	public static void main(String[] args) {
 		new Runner();
 		
-		System.out.println(sin(PI));
+		System.out.println(sin(PI, 35));
 	}
 	
-	public static BigDecimal sin(BigDecimal in) {
+	
+	public static BigDecimal factorial(BigDecimal n) {
+		
+		if (n.equals(BigDecimal.valueOf(1))) {
+			return n;
+		}
+		else {
+			return n.multiply(factorial(n.subtract(BigDecimal.valueOf(1))));
+		}
+	}
+	
+	/**
+	 * Takes the sin of a BigDecimal
+	 * @param in	Number to sin()
+	 * @param iter	Number of times to iterate the taylor series
+	 * @return
+	 */
+	public static BigDecimal sin(BigDecimal in, int iter) {
 		BigDecimal modd = in.add(PI).remainder(PI.multiply(BigDecimal.valueOf(2))).subtract(PI);
 		
 		//up to 7th power
-		BigDecimal firstPart = modd.subtract(modd.pow(3).divide(BigDecimal.valueOf(6), MathContext.DECIMAL128)).add(modd.pow(5).divide(BigDecimal.valueOf(120), MathContext.DECIMAL128)).subtract(modd.pow(7).divide(BigDecimal.valueOf(5040), MathContext.DECIMAL128));
+		//BigDecimal firstPart = modd.subtract(modd.pow(3).divide(BigDecimal.valueOf(6), MathContext.DECIMAL128)).add(modd.pow(5).divide(BigDecimal.valueOf(120), MathContext.DECIMAL128)).subtract(modd.pow(7).divide(BigDecimal.valueOf(5040), MathContext.DECIMAL128));
 		
 		//from 7th power to 13
-		BigDecimal finalPart = firstPart.add(modd.pow(9).divide(BigDecimal.valueOf(362880), MathContext.DECIMAL128)).subtract(modd.pow(11).divide(BigDecimal.valueOf(39916800), MathContext.DECIMAL128)).add(modd.pow(13).divide(BigDecimal.valueOf(6227020800L), MathContext.DECIMAL128));
+		//BigDecimal finalPart = firstPart.add(modd.pow(9).divide(BigDecimal.valueOf(362880), MathContext.DECIMAL128)).subtract(modd.pow(11).divide(BigDecimal.valueOf(39916800), MathContext.DECIMAL128)).add(modd.pow(13).divide(BigDecimal.valueOf(6227020800L), MathContext.DECIMAL128));
 		
-		return finalPart;
+		//int iter = 20;
+		BigDecimal total = BigDecimal.valueOf(0);
+		
+		for (int i = 0; i<iter; i++) {
+			//
+			BigDecimal neg = BigDecimal.valueOf(Math.pow(-1, i));
+			BigDecimal num = in.pow(2*i+1);
+			BigDecimal den = factorial(BigDecimal.valueOf(2*i+1));
+			BigDecimal who = neg.multiply(num.divide(den, MathContext.DECIMAL128));
+			
+			total = total.add(who);
+		}
+		
+		
+		return total;
 		
 	}
 	
@@ -184,6 +215,6 @@ public class Runner extends Canvas implements Runnable{
 	}
 	
 	public static BigDecimal tan(BigDecimal in) {
-		return sin(in).divide(cos(in), MathContext.DECIMAL128);
+		return sin(in,35).divide(cos(in), MathContext.DECIMAL128);
 	}
 }

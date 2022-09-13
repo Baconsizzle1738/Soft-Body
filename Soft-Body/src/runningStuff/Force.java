@@ -16,7 +16,7 @@ public class Force {
 	
 	
 	public BigDecimal getYComponent() {
-		return Runner.sin(angle).multiply(magnitude);
+		return Runner.sin(angle, 30).multiply(magnitude);
 	}
 	
 	public BigDecimal getXComponent() {

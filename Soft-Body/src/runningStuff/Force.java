@@ -16,11 +16,11 @@ public class Force {
 	
 	
 	public BigDecimal getYComponent() {
-		return Runner.sin(angle, 30).multiply(magnitude);
+		return Runner.sin(angle, 20).multiply(magnitude);
 	}
 	
 	public BigDecimal getXComponent() {
-		return Runner.cos(angle).multiply(magnitude);
+		return Runner.cos(angle, 20).multiply(magnitude);
 	}
 	
 	public ForceOrigin getOrigin() {

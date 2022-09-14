@@ -85,8 +85,8 @@ public class Spring extends Interactable{
 		BigDecimal nAng = angleP1().add(Runner.PI);
 		
 		//normal x and y
-		BigDecimal xMag = nMag.multiply(Runner.cos(nAng));
-		BigDecimal yMag = nMag.multiply(Runner.sin(nAng, 35));
+		BigDecimal xMag = nMag.multiply(Runner.cos(nAng, 20));
+		BigDecimal yMag = nMag.multiply(Runner.sin(nAng, 20));
 		
 		//dot product
 		vectorX = vectorX.multiply(xMag);

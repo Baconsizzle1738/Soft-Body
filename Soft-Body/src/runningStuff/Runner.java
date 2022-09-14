@@ -242,6 +242,6 @@ public class Runner extends Canvas implements Runnable{
 	
 	public static BigDecimal tan(BigDecimal in) {
 		//System.out.println("PISS");
-		return sin(in, 20).divide(cos(in, 20), MathContext.DECIMAL128);
+		return sin(in, 10).divide(cos(in, 10), MathContext.DECIMAL128);
 	}
 }

@@ -48,21 +48,24 @@ public class Scene extends Updateable{
 		//handler.add(s6);
 		
 		
-		makeRect(7, 5, 300, 300);
+		makeRect(3, 4, 300, 300, 30);
 	}
 	
 	/**
 	 * Make a rectangle of MassPoints with top left corner at (x, y).
-	 * @param width
-	 * @param height
-	 * @param x
-	 * @param y
+	 * @param width		width of rectangle
+	 * @param height	height of rectangle
+	 * @param x			x value of initial location
+	 * @param y			y value of initial location
+	 * @param dens		The density of the mass points, lower number is closer together
 	 */
-	private void makeRect(int width, int height, int x, int y) {
+	private void makeRect(int width, int height, int x, int y, int dens) {
 		MassPoint[][] rectangle = new MassPoint[height][width];
+		
+		//make all the mass points inside the rectangle
 		for (int i = 0; i<height; i++) {
 			for (int j = 0; j<width; j++) {
-				MassPoint make = new MassPoint(x+(15*j), y+(15*i));
+				MassPoint make = new MassPoint(x+(dens*j), y+(dens*i));
 				rectangle[i][j] = make;
 				handler.add(make);
 			}
@@ -71,9 +74,52 @@ public class Scene extends Updateable{
 		//make springs
 		for (int i = 0; i<height; i++) {
 			for (int j = 0; j<width; j++) {
+				//left points
+				try {
+					//spring connecting to right
+					handler.add(new Spring(BigDecimal.valueOf(dens), BigDecimal.valueOf(0.5), rectangle[i][j], rectangle[i][j+1]));
+					
+				}
+				catch (Exception e) {
+					System.out.println("can't connect here lol");
+					System.out.println(i + "," + j);
+				}
 				
+				try {
+					//spring connecting to bottom right
+					handler.add(new Spring(BigDecimal.valueOf(Math.sqrt(dens*dens)), BigDecimal.valueOf(0.5), rectangle[i][j], rectangle[i+1][j+1]));
+					
+					
+				}
+				catch(Exception e) {
+					System.out.println("can't connect here lol");
+					System.out.println(i + "," + j);
+				}
+				
+				try {
+					//spring connecting to bottom
+					handler.add(new Spring(BigDecimal.valueOf(dens), BigDecimal.valueOf(0.5), rectangle[i][j], rectangle[i+1][j]));
+					
+					
+				}
+				catch(Exception e) {
+					System.out.println("can't connect here lol");
+					System.out.println(i + "," + j);
+				}
+				
+				try {
+					//spring connecting to bottom left
+					handler.add(new Spring(BigDecimal.valueOf(Math.sqrt(dens*dens)), BigDecimal.valueOf(0.5), rectangle[i][j], rectangle[i+1][j-1]));
+					
+				}
+				catch (Exception e) {
+					System.out.println("can't connect here lol");
+					System.out.println(i + "," + j);
+				}
 			}
 		}
+		
+		System.out.println("Number of things: " + handler.getObjects().size());
 	}
 	
 	@Override

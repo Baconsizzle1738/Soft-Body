@@ -74,7 +74,10 @@ public class Spring extends Interactable{
 //		BigDecimal diff = p2.getVolMag().subtract(p1.getVolMag());
 //		return neg.multiply(diff).multiply(kd);
 //	}
-	
+	/**
+	 * Returns the damper magnitude of the force so that it gradually slows down.
+	 * @return
+	 */
 	private BigDecimal damperMag() {
 		//difference of velocity vectors
 		BigDecimal vectorX = BigDecimal.valueOf(p1.getVolX()-p2.getVolX());

@@ -74,7 +74,7 @@ public class Scene extends Updateable{
 		//make springs
 		for (int i = 0; i<height; i++) {
 			for (int j = 0; j<width; j++) {
-				//left points
+				//This is the most jank way to do it but I dont wanna code like 5 if statements
 				try {
 					//spring connecting to right
 					handler.add(new Spring(BigDecimal.valueOf(dens), BigDecimal.valueOf(0.5), rectangle[i][j], rectangle[i][j+1]));

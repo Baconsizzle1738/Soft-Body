@@ -4,23 +4,23 @@ import java.math.BigDecimal;
 
 public class Force {
 	
-	private BigDecimal magnitude, angle;
+	private double magnitude, angle;
 	
 	ForceOrigin origin;
 	
-	public Force(BigDecimal mag, BigDecimal rad, ForceOrigin o) {
+	public Force(double mag, double rad, ForceOrigin o) {
 		magnitude = mag;
 		angle = rad;
 		origin = o;
 	}
 	
 	
-	public BigDecimal getYComponent() {
-		return Runner.sin(angle, 10).multiply(magnitude);
+	public double getYComponent() {
+		return Math.sin(angle) * magnitude;
 	}
 	
-	public BigDecimal getXComponent() {
-		return Runner.cos(angle, 10).multiply(magnitude);
+	public double getXComponent() {
+		return Math.cos(angle) * magnitude;
 	}
 	
 	public ForceOrigin getOrigin() {

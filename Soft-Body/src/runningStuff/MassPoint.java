@@ -29,11 +29,11 @@ public class MassPoint extends Interactable{
 		forces.clear();
 	}
 	
-	private BigDecimal netForceX() {
-		BigDecimal magnitudeX = new BigDecimal(0);
+	private double netForceX() {
+		double magnitudeX = 0;
 		
 		for (int i = 0; i<forces.size(); i++) {
-			magnitudeX = magnitudeX.add(forces.get(i).getXComponent());
+			magnitudeX = magnitudeX + forces.get(i).getXComponent();
 		}
 		//System.out.println(magnitudeX);
 		return magnitudeX;
@@ -58,16 +58,16 @@ public class MassPoint extends Interactable{
 		return yVol;
 	}
 	
-	public BigDecimal getVolMag() {
+	public double getVolMag() {
 		double mag = Math.sqrt(Math.pow(xVol, 2) + Math.pow(yVol, 2));
-		return BigDecimal.valueOf(mag);
+		return mag;
 	}
 	
-	private BigDecimal netForceY() {
-		BigDecimal magnitudeY = new BigDecimal(0);
+	private double netForceY() {
+		double magnitudeY = 0;
 		
 		for (int i = 0; i<forces.size(); i++) {
-			magnitudeY = magnitudeY.add(forces.get(i).getYComponent());
+			magnitudeY = magnitudeY + forces.get(i).getYComponent();
 			//System.out.println(magnitudeY);
 		}
 		
@@ -88,8 +88,8 @@ public class MassPoint extends Interactable{
 //			forces.add(new Force(mass*0.163333f, (double)Math.PI/2));
 //		}
 		
-		double accelerationX = netForceX().doubleValue()/mass;
-		double accelerationY = netForceY().doubleValue()/mass;
+		double accelerationX = netForceX()/mass;
+		double accelerationY = netForceY()/mass;
 		
 		xVol+=accelerationX;
 		yVol+=accelerationY;

@@ -22,11 +22,11 @@ public class Scene extends Updateable{
 		MassPoint m3 = new MassPoint(150, 300);
 		//MassPoint m4 = new MassPoint(200, 200);
 		
-		Spring s = new Spring(BigDecimal.valueOf(130), BigDecimal.valueOf(0.01), m1, m2);
-		Spring s2 = new Spring(BigDecimal.valueOf(100), BigDecimal.valueOf(0.01), m2, m3);
+		Spring s = new Spring(130, 0.01, m1, m2);
+		Spring s2 = new Spring(100, 0.01, m2, m3);
 		//Spring s3 = new Spring(BigDecimal.valueOf(100), BigDecimal.valueOf(0.000001), m3, m4);
 		//Spring s4 = new Spring(BigDecimal.valueOf(100), BigDecimal.valueOf(0.000001), m4, m1);
-		Spring s5 = new Spring(BigDecimal.valueOf(141.4214f), BigDecimal.valueOf(0.01), m1, m3);
+		Spring s5 = new Spring(141.4214, 0.01, m1, m3);
 		//Spring s6 = new Spring(BigDecimal.valueOf(141.4214), BigDecimal.valueOf(0.1), m2, m4);
 //		m1.addForce(new Force(0.098f, (double)Math.PI*0.5f));
 //		MassPoint m2 = new MassPoint(100, 102);
@@ -78,7 +78,7 @@ public class Scene extends Updateable{
 				//This is the most jank way to do it but I dont wanna code like 5 if statements
 				try {
 					//spring connecting to right
-					handler.add(new Spring(BigDecimal.valueOf(dens), BigDecimal.valueOf(stiff), rectangle[i][j], rectangle[i][j+1]));
+					handler.add(new Spring(dens, stiff, rectangle[i][j], rectangle[i][j+1]));
 					
 				}
 				catch (Exception e) {
@@ -88,7 +88,7 @@ public class Scene extends Updateable{
 				
 				try {
 					//spring connecting to bottom right
-					handler.add(new Spring(BigDecimal.valueOf(Math.sqrt(dens*dens)), BigDecimal.valueOf(stiff), rectangle[i][j], rectangle[i+1][j+1]));
+					handler.add(new Spring(Math.sqrt(dens*dens), stiff, rectangle[i][j], rectangle[i+1][j+1]));
 					
 					
 				}
@@ -99,7 +99,7 @@ public class Scene extends Updateable{
 				
 				try {
 					//spring connecting to bottom
-					handler.add(new Spring(BigDecimal.valueOf(dens), BigDecimal.valueOf(stiff), rectangle[i][j], rectangle[i+1][j]));
+					handler.add(new Spring(dens, stiff, rectangle[i][j], rectangle[i+1][j]));
 					
 					
 				}
@@ -110,7 +110,7 @@ public class Scene extends Updateable{
 				
 				try {
 					//spring connecting to bottom left
-					handler.add(new Spring(BigDecimal.valueOf(Math.sqrt(dens*dens)), BigDecimal.valueOf(stiff), rectangle[i][j], rectangle[i+1][j-1]));
+					handler.add(new Spring(Math.sqrt(dens*dens), stiff, rectangle[i][j], rectangle[i+1][j-1]));
 					
 				}
 				catch (Exception e) {

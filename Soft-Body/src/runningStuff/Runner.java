@@ -186,58 +186,58 @@ public class Runner extends Canvas implements Runnable{
 	 * @return
 	 */
 	public static BigDecimal sin(BigDecimal in, int iter) {
-		//BigDecimal modd = in.add(PI).remainder(PI.multiply(BigDecimal.valueOf(2))).subtract(PI);
+		BigDecimal modd = in.add(PI).remainder(PI.multiply(BigDecimal.valueOf(2))).subtract(PI);
 		
 		//up to 7th power
-		//BigDecimal firstPart = modd.subtract(modd.pow(3).divide(BigDecimal.valueOf(6), MathContext.DECIMAL128)).add(modd.pow(5).divide(BigDecimal.valueOf(120), MathContext.DECIMAL128)).subtract(modd.pow(7).divide(BigDecimal.valueOf(5040), MathContext.DECIMAL128));
+		BigDecimal firstPart = modd.subtract(modd.pow(3).divide(BigDecimal.valueOf(6), MathContext.DECIMAL128)).add(modd.pow(5).divide(BigDecimal.valueOf(120), MathContext.DECIMAL128)).subtract(modd.pow(7).divide(BigDecimal.valueOf(5040), MathContext.DECIMAL128));
 		
 		//from 7th power to 13
-		//BigDecimal finalPart = firstPart.add(modd.pow(9).divide(BigDecimal.valueOf(362880), MathContext.DECIMAL128)).subtract(modd.pow(11).divide(BigDecimal.valueOf(39916800), MathContext.DECIMAL128)).add(modd.pow(13).divide(BigDecimal.valueOf(6227020800L), MathContext.DECIMAL128));
+		BigDecimal finalPart = firstPart.add(modd.pow(9).divide(BigDecimal.valueOf(362880), MathContext.DECIMAL128)).subtract(modd.pow(11).divide(BigDecimal.valueOf(39916800), MathContext.DECIMAL128)).add(modd.pow(13).divide(BigDecimal.valueOf(6227020800L), MathContext.DECIMAL128));
 		
 		//int iter = 20;
-		BigDecimal total = BigDecimal.valueOf(0);
+//		BigDecimal total = BigDecimal.valueOf(0);
+//		
+//		for (int i = 0; i<iter; i++) {
+//			//
+//			BigDecimal neg = BigDecimal.valueOf(Math.pow(-1, i));
+//			BigDecimal num = in.pow(2*i+1);
+//			BigDecimal den = factorial(BigDecimal.valueOf(2*i+1));
+//			BigDecimal who = neg.multiply(num.divide(den, MathContext.DECIMAL128));
+//			
+//			total = total.add(who);
+//		}
 		
-		for (int i = 0; i<iter; i++) {
-			//
-			BigDecimal neg = BigDecimal.valueOf(Math.pow(-1, i));
-			BigDecimal num = in.pow(2*i+1);
-			BigDecimal den = factorial(BigDecimal.valueOf(2*i+1));
-			BigDecimal who = neg.multiply(num.divide(den, MathContext.DECIMAL128));
-			
-			total = total.add(who);
-		}
 		
-		
-		return total;
+		return finalPart;
 		
 	}
 	
 	public static BigDecimal cos(BigDecimal in, int iter) {
-		//BigDecimal modd = in.add(PI).remainder(PI.multiply(BigDecimal.valueOf(2))).subtract(PI);
+		BigDecimal modd = in.add(PI).remainder(PI.multiply(BigDecimal.valueOf(2))).subtract(PI);
 		
 		//up to 8th polynomial
-		//BigDecimal firstPart = BigDecimal.valueOf(1).subtract(modd.pow(2).divide(BigDecimal.valueOf(2), MathContext.DECIMAL128)).add(modd.pow(4).divide(BigDecimal.valueOf(24), MathContext.DECIMAL128)).subtract(modd.pow(6).divide(BigDecimal.valueOf(720), MathContext.DECIMAL128)).add(modd.pow(8).divide(BigDecimal.valueOf(40320), MathContext.DECIMAL128));
+		BigDecimal firstPart = BigDecimal.valueOf(1).subtract(modd.pow(2).divide(BigDecimal.valueOf(2), MathContext.DECIMAL128)).add(modd.pow(4).divide(BigDecimal.valueOf(24), MathContext.DECIMAL128)).subtract(modd.pow(6).divide(BigDecimal.valueOf(720), MathContext.DECIMAL128)).add(modd.pow(8).divide(BigDecimal.valueOf(40320), MathContext.DECIMAL128));
 		
 		//to 16th polynomial
-		//BigDecimal finalPart = firstPart.subtract(modd.pow(10).divide(BigDecimal.valueOf(3628800), MathContext.DECIMAL128)).add(modd.pow(12).divide(BigDecimal.valueOf(479001600), MathContext.DECIMAL128)).subtract(modd.pow(14).divide(BigDecimal.valueOf(87178291200L), MathContext.DECIMAL128)).add(modd.pow(16).divide(BigDecimal.valueOf(20922789888000L), MathContext.DECIMAL128));
+		BigDecimal finalPart = firstPart.subtract(modd.pow(10).divide(BigDecimal.valueOf(3628800), MathContext.DECIMAL128)).add(modd.pow(12).divide(BigDecimal.valueOf(479001600), MathContext.DECIMAL128)).subtract(modd.pow(14).divide(BigDecimal.valueOf(87178291200L), MathContext.DECIMAL128)).add(modd.pow(16).divide(BigDecimal.valueOf(20922789888000L), MathContext.DECIMAL128));
 		
 		//return finalPart;
 		
-		BigDecimal total = BigDecimal.valueOf(0);
+//		BigDecimal total = BigDecimal.valueOf(0);
+//		
+//		for (int i = 0; i<iter; i++) {
+//			
+//			BigDecimal neg = BigDecimal.valueOf(Math.pow(-1, i));
+//			BigDecimal num = in.pow(2*i);
+//			//System.out.println(BigDecimal.valueOf(2*i));
+//			BigDecimal den = factorial(BigDecimal.valueOf(2*i));
+//			BigDecimal who = neg.multiply(num.divide(den, MathContext.DECIMAL128));
+//			//System.out.println("PISS");
+//			total = total.add(who);
+//		}
 		
-		for (int i = 0; i<iter; i++) {
-			
-			BigDecimal neg = BigDecimal.valueOf(Math.pow(-1, i));
-			BigDecimal num = in.pow(2*i);
-			//System.out.println(BigDecimal.valueOf(2*i));
-			BigDecimal den = factorial(BigDecimal.valueOf(2*i));
-			BigDecimal who = neg.multiply(num.divide(den, MathContext.DECIMAL128));
-			//System.out.println("PISS");
-			total = total.add(who);
-		}
 		
-		
-		return total;
+		return finalPart;
 	}
 	
 	public static BigDecimal tan(BigDecimal in) {

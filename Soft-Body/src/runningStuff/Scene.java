@@ -18,15 +18,15 @@ public class Scene extends Updateable{
 //		MassPoint m = new MassPoint(100, 100);
 //		m.addForce(new Force(0.098f, 0f));
 		MassPoint m1 = new MassPoint(100, 50);
-		MassPoint m2 = new MassPoint(100, 200);
-		MassPoint m3 = new MassPoint(150, 300);
+		MassPoint m2 = new MassPoint(100, 500);
+		MassPoint m3 = new MassPoint(150, 500);
 		//MassPoint m4 = new MassPoint(200, 200);
 		
-		Spring s = new Spring(130, 0.01, m1, m2);
-		Spring s2 = new Spring(100, 0.01, m2, m3);
+		Spring s = new Spring(150, 0.07, m1, m2);
+		//Spring s2 = new Spring(100, 0.01, m2, m3);
 		//Spring s3 = new Spring(BigDecimal.valueOf(100), BigDecimal.valueOf(0.000001), m3, m4);
 		//Spring s4 = new Spring(BigDecimal.valueOf(100), BigDecimal.valueOf(0.000001), m4, m1);
-		Spring s5 = new Spring(141.4214, 0.01, m1, m3);
+		//Spring s5 = new Spring(200, 0.01, m1, m3);
 		//Spring s6 = new Spring(BigDecimal.valueOf(141.4214), BigDecimal.valueOf(0.1), m2, m4);
 //		m1.addForce(new Force(0.098f, (double)Math.PI*0.5f));
 //		MassPoint m2 = new MassPoint(100, 102);
@@ -41,18 +41,21 @@ public class Scene extends Updateable{
 		
 		
 		handler.add(s);
-		handler.add(s2);
+		//handler.add(s2);
 		//handler.add(s3);
 		//handler.add(s4);
-		handler.add(s5);
+		//handler.add(s5);
 		//handler.add(s6);
 		
 		
-		makeRect(3, 4, 300, 300, 30, 0.01f);
+		makeRect(5, 7, 300, 300, 30, 0.7);
 	}
 	
 	/**
-	 * Make a rectangle of MassPoints with top left corner at (x, y).
+	 * Make a rectangle of MassPoints interconnected with springs with the top left corner at (x, y). 
+	 * 
+	 *It is recommended to put stiffness at less than 0.2 for stability reasons.
+	 * 
 	 * @param width		width of rectangle
 	 * @param height	height of rectangle
 	 * @param x			x value of initial location
@@ -60,7 +63,7 @@ public class Scene extends Updateable{
 	 * @param dens		The density of the mass points, lower number is closer together
 	 * @param stiff		The stiffness of the springs, higher values are stiffer
 	 */
-	private void makeRect(int width, int height, int x, int y, int dens, float stiff) {
+	private void makeRect(int width, int height, int x, int y, int dens, double stiff) {
 		MassPoint[][] rectangle = new MassPoint[height][width];
 		
 		//make all the mass points inside the rectangle
@@ -88,7 +91,7 @@ public class Scene extends Updateable{
 				
 				try {
 					//spring connecting to bottom right
-					handler.add(new Spring(Math.sqrt(dens*dens), stiff, rectangle[i][j], rectangle[i+1][j+1]));
+					handler.add(new Spring(Math.sqrt(dens*dens + dens*dens), stiff, rectangle[i][j], rectangle[i+1][j+1]));
 					
 					
 				}
@@ -110,7 +113,7 @@ public class Scene extends Updateable{
 				
 				try {
 					//spring connecting to bottom left
-					handler.add(new Spring(Math.sqrt(dens*dens), stiff, rectangle[i][j], rectangle[i+1][j-1]));
+					handler.add(new Spring(Math.sqrt(dens*dens + dens*dens), stiff, rectangle[i][j], rectangle[i+1][j-1]));
 					
 				}
 				catch (Exception e) {
@@ -120,7 +123,7 @@ public class Scene extends Updateable{
 			}
 		}
 		
-		System.out.println("Number of things: " + handler.getObjects().size());
+		//System.out.println("Number of things: " + handler.getObjects().size());
 	}
 	
 	@Override

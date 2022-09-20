@@ -3,15 +3,16 @@ package runningStuff;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.math.BigDecimal;
 import java.util.LinkedList;
 
 public class MassPoint extends Interactable{
 	
-	private float x, y, xVol, yVol, mass;
+	private double x, y, xVol, yVol, mass;
 	
 	private LinkedList<Force> forces;
 	
-	public MassPoint(float x, float y){
+	public MassPoint(double x, double y){
 		
 		this.x = x;
 		this.y = y;
@@ -28,18 +29,18 @@ public class MassPoint extends Interactable{
 		forces.clear();
 	}
 	
-	private float netForceX() {
-		float magnitudeX = 0;
+	private double netForceX() {
+		double magnitudeX = 0;
 		
 		for (int i = 0; i<forces.size(); i++) {
-			magnitudeX+=forces.get(i).getXComponent();
+			magnitudeX = magnitudeX + forces.get(i).getXComponent();
 		}
-		
-		
+		//System.out.println(magnitudeX);
 		return magnitudeX;
 		
 	}
 	
+	//get x and y
 	public int getX() {
 		return (int)x;
 	}
@@ -48,11 +49,26 @@ public class MassPoint extends Interactable{
 		return (int)y;
 	}
 	
-	private float netForceY() {
-		float magnitudeY = 0;
+	//get velocity
+	public double getVolX() {
+		return xVol;
+	}
+	
+	public double getVolY() {
+		return yVol;
+	}
+	
+	public double getVolMag() {
+		double mag = Math.sqrt(Math.pow(xVol, 2) + Math.pow(yVol, 2));
+		return mag;
+	}
+	
+	private double netForceY() {
+		double magnitudeY = 0;
 		
 		for (int i = 0; i<forces.size(); i++) {
-			magnitudeY+=forces.get(i).getYComponent();
+			magnitudeY = magnitudeY + forces.get(i).getYComponent();
+			//System.out.println(magnitudeY);
 		}
 		
 		
@@ -69,19 +85,23 @@ public class MassPoint extends Interactable{
 	@Override
 	public void tick() {
 //		if (Runner.gravity) {
-//			forces.add(new Force(mass*0.163333f, (float)Math.PI/2));
+//			forces.add(new Force(mass*0.163333f, (double)Math.PI/2));
 //		}
 		
-		float accelerationX = netForceX()/mass;
-		float accelerationY = netForceY()/mass;
+		double accelerationX = netForceX()/mass;
+		double accelerationY = netForceY()/mass;
 		
 		xVol+=accelerationX;
-		yVol-=accelerationY;
+		yVol+=accelerationY;
+		//System.out.println(netForceX());
 		
-		
-		//subtract y vol because the canvas has origin at the top of the page
 		x+=xVol;
-		y-=yVol;
+		y+=yVol;
+//		x = Runner.round(x);
+//		y = Runner.round(y);
+		
+//		System.out.println(accelerationX);
+//		System.out.println(accelerationY);
 		
 		clearForces();
 	}
@@ -90,6 +110,10 @@ public class MassPoint extends Interactable{
 	public void render(Graphics g) {
 		g.setColor(new Color(200, 0, 0));
 		g.fillOval((int)x-5, (int)y-5, 10, 10);
+	}
+	
+	public String toString() {
+		return x + "," + y + " " + forces;
 	}
 
 }

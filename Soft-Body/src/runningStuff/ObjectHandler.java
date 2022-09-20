@@ -19,6 +19,10 @@ public class ObjectHandler extends Updateable {
 		objects.remove(x);
 	}
 	
+	public LinkedList<Interactable> getObjects() {
+		return objects;
+	}
+	
 	@Override
 	public void tick() {
 		for (int i = 0; i<objects.size(); i++) {

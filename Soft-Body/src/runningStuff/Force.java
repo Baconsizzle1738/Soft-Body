@@ -16,6 +16,7 @@ public class Force {
 	
 	
 	public double getYComponent() {
+		//System.out.println(Math.sin(angle) * magnitude);
 		return Math.sin(angle) * magnitude;
 	}
 	

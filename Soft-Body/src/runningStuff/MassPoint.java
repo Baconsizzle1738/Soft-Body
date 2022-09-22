@@ -12,10 +12,13 @@ public class MassPoint extends Interactable{
 	
 	private LinkedList<Force> forces;
 	
-	public MassPoint(double x, double y){
+	private ObjectHandler handler;
+	
+	public MassPoint(double x, double y, ObjectHandler h){
 		
 		this.x = x;
 		this.y = y;
+		this.handler = h;
 		forces = new LinkedList<Force>();
 		
 		mass = 5;
@@ -28,6 +31,11 @@ public class MassPoint extends Interactable{
 	private void clearForces() {
 		forces.clear();
 	}
+	
+	/**
+	 * This is the magnitude of the net force of the point in the x direction
+	 * @return
+	 */
 	
 	private double netForceX() {
 		double magnitudeX = 0;
@@ -58,17 +66,25 @@ public class MassPoint extends Interactable{
 		return yVol;
 	}
 	
+	/**
+	 * Returns the magnitude of velocity
+	 * @return
+	 */
 	public double getVolMag() {
 		double mag = Math.sqrt(Math.pow(xVol, 2) + Math.pow(yVol, 2));
 		return mag;
 	}
 	
+	/**
+	 * This is the magnitude of the net force of the point in the y direction
+	 * @return
+	 */
 	private double netForceY() {
 		double magnitudeY = 0;
 		
 		for (int i = 0; i<forces.size(); i++) {
 			magnitudeY = magnitudeY + forces.get(i).getYComponent();
-			//System.out.println(magnitudeY);
+			System.out.println(forces.get(i).getYComponent());
 		}
 		
 		
@@ -79,17 +95,50 @@ public class MassPoint extends Interactable{
 	@Override
 	public Rectangle getBounds() {
 		
-		return null;
+		return new Rectangle((int)x-5, (int)y-5, 10, 10);
 	}
 
 	@Override
 	public void tick() {
-//		if (Runner.gravity) {
-//			forces.add(new Force(mass*0.163333f, (double)Math.PI/2));
-//		}
 		
-		double accelerationX = netForceX()/mass;
-		double accelerationY = netForceY()/mass;
+		//gravity
+		if (Runner.gravity) {
+			forces.add(new Force(mass*0.163333, (double)Math.PI/2, ForceOrigin.Gravity));
+		}
+		
+		double accelerationX = 0;
+		double accelerationY = 0;
+		
+		//collision detection
+		for (int i = 0; i<handler.getObjects().size(); i++) {
+			
+			//make sure the thing is an obstacle
+			if (handler.getObjects().get(i).getClass().equals(new Obstacle(0, 0, 0, 0).getClass())) {
+				
+				//already determined if obstacle
+				Obstacle o = (Obstacle) handler.getObjects().get(i);
+				if (this.getBounds().intersects(o.getBounds())) {
+					//this is only for if the obstacle is hit on the top, fix later for all sides
+					//System.out.println(netForceY());
+					Force normal = new Force(-netForceY(), Math.PI/2, ForceOrigin.Gravity);
+					
+					forces.add(normal);
+					//y -= 10;
+					//System.out.println("HECC");
+//					yVol = 0;
+//					accelerationY = -2*netForceY()/mass;
+					
+					
+				}
+			}
+			
+		}
+		
+		
+		
+		//calculated after all forces are considered
+		accelerationX += netForceX()/mass;
+		accelerationY += netForceY()/mass;
 		
 		xVol+=accelerationX;
 		yVol+=accelerationY;

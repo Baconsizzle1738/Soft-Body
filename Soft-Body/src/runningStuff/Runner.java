@@ -35,7 +35,7 @@ public class Runner extends Canvas implements Runnable{
 	
 	Scene scene;
 	
-	public static boolean gravity = true;
+	public static boolean gravity = false;
 	
 	public Runner () {
 		

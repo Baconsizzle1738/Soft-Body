@@ -19,15 +19,15 @@ public class Scene extends Updateable{
 //		m.addForce(new Force(0.098f, 0f));
 		MassPoint m1 = new MassPoint(100, 50, handler);
 		MassPoint m2 = new MassPoint(50, 100, handler);
-		MassPoint m3 = new MassPoint(150, 100, handler);
-		//MassPoint m4 = new MassPoint(200, 200);
+		MassPoint m3 = new MassPoint(100, 100, handler);
+		MassPoint m4 = new MassPoint(50, 50, handler);
 		
-		Spring s = new Spring(112, 0.5, m1, m2);
-		Spring s2 = new Spring(100, 0.5, m2, m3);
-		//Spring s3 = new Spring(BigDecimal.valueOf(100), BigDecimal.valueOf(0.000001), m3, m4);
-		//Spring s4 = new Spring(BigDecimal.valueOf(100), BigDecimal.valueOf(0.000001), m4, m1);
+		Spring s = new Spring(100, 0.5, m1, m3);
+		Spring s2 = new Spring(100, 0.5, m2, m4);
+		Spring s3 = new Spring(100, 0.1, m3, m4);
+		Spring s4 = new Spring(100, 0.5, m2, m1);
 		Spring s5 = new Spring(112, 0.5, m1, m3);
-		//Spring s6 = new Spring(BigDecimal.valueOf(141.4214), BigDecimal.valueOf(0.1), m2, m4);
+		Spring s6 = new Spring(300, 0.1, m2, m3);
 //		m1.addForce(new Force(0.098f, (double)Math.PI*0.5f));
 //		MassPoint m2 = new MassPoint(100, 102);
 //		m2.addForce(new Force(0.098f, (double)Math.PI));
@@ -37,18 +37,18 @@ public class Scene extends Updateable{
 		handler.add(m1);
 		handler.add(m2);
 		handler.add(m3);
-		//handler.add(m4);
+		handler.add(m4);
 		
 		
 		handler.add(s);
 		handler.add(s2);
-		//handler.add(s3);
-		//handler.add(s4);
+		handler.add(s3);
+		handler.add(s4);
 		handler.add(s5);
-		//handler.add(s6);
+		handler.add(s6);
 		
 		
-		makeRect(5, 7, 300, 300, 30, 0.01);
+		makeRect(5, 7, 300, 300, 25, 0.01);
 		
 		handler.add(new Obstacle(-1000, 550, 2000, 400));
 	}
